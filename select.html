@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <title>Matheking</title>
+    </head>
+
+    <body>
+        <div class="title">Matheking</div>
+
+        <div style="text-align: center;">
+            <p>Was möchtest du spielen?</p>
+            <div style="margin: 10px;" class="games">
+            </div>
+        </div>
+
+    </body>
+    <script>
+        var games = ["mul", "div"];
+        const params = new URLSearchParams(window.location.search);
+        const player = params.get('player');
+
+        var gamesDiv = document.querySelector("div.games");
+        for (let i in games) {
+            gamesDiv.innerHTML += "<li><a href=\"game.html?g="+games[i]+"&player=" + player + "\">" + games[i] + "</a></li>";
+        }
+    </script>
+</html>

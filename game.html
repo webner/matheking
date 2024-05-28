@@ -18,6 +18,7 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         const name = params.get('player');
+        const g = params.get('g');
         const startTime = new Date();
 
         function ascending(a, b) { return a-b; }
@@ -38,16 +39,28 @@
             }
         }
 
-        // initialize data
-        tests = []
-        uniq_answers = new Set();
-        for (a = 2; a <= 10; a++) {
-            for (b = 2; b <= 10; b++) {
-                tests.push({"question": a + " * " + b + " =", answer: a*b});
-                uniq_answers.add(a*b)
+        function mulTests() {
+            let tests = []
+            for (a = 2; a <= 10; a++) {
+                for (b = 2; b <= 10; b++) {
+                    tests.push({"question": a + " * " + b + " =", answer: a*b});
+                }
             }
+            return tests;
         }
-        uniq_answers = Array.from(uniq_answers).sort(ascending);
+
+        function divTests() {
+            let tests = []
+            for (a = 2; a <= 10; a++) {
+                for (b = 2; b <= 10; b++) {
+                    tests.push({"question": (a*b) + " / " + b + " =", answer: a});
+                }
+            }
+            return tests;
+        }
+
+        tests = g == "mul" ? mulTests() : divTests();
+        uniq_answers = Array.from(new Set(tests.map(t => t.answer))).sort(ascending);
         shuffle(tests);
 
         questionNr = 0
@@ -63,7 +76,7 @@
             }
             questionNr += 1;
             const counter = document.querySelector('div.counter');
-            counter.innerHTML = "Frage " + questionNr + ": ";
+            counter.innerHTML = "Frage " + questionNr;
 
 
             const test = tests[(questionNr-1)%tests.length]
