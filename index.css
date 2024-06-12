@@ -3,6 +3,23 @@
     border: 1px solid red !important;
 }*/
 
+table.highscore {
+    margin: 0 auto;
+    width: 50%;
+}
+
+table.highscore td, table.highscore, table.highscore th {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    padding: 0;
+    border-spacing: 0;
+}
+
+table.highscore  th {
+    width: 100px;
+}
+
 a.selected {
     font-weight: bold;
     color: inherit;

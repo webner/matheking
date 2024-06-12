@@ -5,16 +5,20 @@ try {
 }
 
 if (!highscore) {
-    highscore=[]
+    highscore={}
 }
 
 function updateHighscore() {
-    table = document.querySelector("#highscore-entries");
-    table.innerHTML = "";
-    if (highscore) {
-        highscore.forEach((entry, index) => {
-            table.innerHTML += "<tr><td>" + (index+1) + ".</td><td>"+entry.playerName+"</td><td>"+entry.time+"</td></tr>"
-        });
+
+    for (g of ["add", "sub", "mul", "div"]) {
+        table = document.querySelector("#highscore-"+g+" .entries");
+        table.innerHTML = "";
+
+        if (highscore[g]) {
+            highscore[g].forEach((entry, index) => {
+                table.innerHTML += "<tr><td>" + (index+1) + ".</td><td>"+entry.playerName+"</td><td>"+entry.time+"</td></tr>"
+            });
+        }
     }
 }
 
@@ -104,6 +108,26 @@ function question(q, a) {
     return {question: q, answer: a}
 }
 
+function addQuestions() {
+    let questions = []
+    for (a = 1; a <= 20; a++) {
+        for (b = 0; b <= 20; b++) {
+            questions.push(question(a + " + " + b + " =", a+b));
+        }
+    }
+    return questions;
+}
+
+function subQuestions() {
+    let questions = []
+    for (a = 0; a <= 20; a++) {
+        for (b = a; b <= 20; b++) {
+            questions.push(question(b + " - " + a + " =", b-a));
+        }
+    }
+    return questions;
+}
+
 function mulQuestions() {
     let questions = []
     for (a = 2; a <= 10; a++) {
@@ -114,7 +138,7 @@ function mulQuestions() {
     return questions;
 }
 
-function devQuestions() {
+function divQuestions() {
     let questions = []
     for (a = 2; a <= 10; a++) {
         for (b = 2; b <= 10; b++) {
@@ -125,8 +149,12 @@ function devQuestions() {
 }
 
 function addHighscore(time) {
-    highscore.sort((a, b) => a.time - b.time);
-    highscore.push({playerName: player, time: time})
+    if (!highscore[game]) {
+        highscore[game] = []
+    }
+    h = highscore[game]
+    h.push({playerName: player, time: time})
+    h.sort((a, b) => a.time - b.time);
     localStorage.setItem('highscore',  JSON.stringify(highscore));
     updateHighscore();
 }
@@ -204,7 +232,13 @@ function validateAnswer(event) {
 
 function startGame(g) {
     game = g;
-    tests = game == "mul" ? mulQuestions() : devQuestions();
+    switch (game) {
+        case 'mul': tests = mulQuestions(); break;
+        case 'div': tests = divQuestions(); break;
+        case 'add': tests = addQuestions(); break;
+        case 'sub': tests = subQuestions(); break;
+    }
+
     uniq_answers = Array.from(new Set(tests.map(t => t.answer))).sort(ascending);
     shuffle(tests);
     
@@ -224,7 +258,7 @@ if (location.hash) {
 if (player) {
     login(player);
 }
-if (!player) nav = 'login';
+if (!player && nav != "highscore") nav = 'login';
 if (nav == "game") {
     nav = "select";
 }

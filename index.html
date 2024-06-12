@@ -38,22 +38,37 @@
                 </div>
             </div>
             <div id="highscore" class="view hidden">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Platz</th>
-                            <th>Name</th>
-                            <th>Zeit</th>
-                        </tr>
-                    </thead>
-                    <tbody id="highscore-entries">
-                    </tbody>
-                </table>            </div>
+                <h4>Addition</h4>
+                <table id="highscore-add" class="highscore">
+                    <thead><tr><th>Platz</th><th>Name</th><th>Zeit</th></tr></thead>
+                    <tbody class="entries"></tbody>
+                </table> 
+                <br>
+                <h4>Subtraktion</h4>
+                <table id="highscore-sub" class="highscore">
+                    <thead><tr><th>Platz</th><th>Name</th><th>Zeit</th></tr></thead>
+                    <tbody class="entries"></tbody>
+                </table> 
+                <br>
+                <h4>Multiplikation</h4>
+                <table id="highscore-mul" class="highscore">
+                    <thead><tr><th>Platz</th><th>Name</th><th>Zeit</th></tr></thead>
+                    <tbody class="entries"></tbody>
+                </table> 
+                <br>
+                <h4>Division</h4>
+                <table id="highscore-div" class="highscore">
+                    <thead><tr><th>Platz</th><th>Name</th><th>Zeit</th></tr></thead>
+                    <tbody class="entries"></tbody>
+                </table> 
+            </div>
 
             <div id="select" class="view hidden">
                 <div>
                     <p>Was möchtest du spielen?</p>
                     <div style="margin: 10px; text-align: left;" class="games">
+                        <li><a href="#game" onclick="startGame('add')">Addition</a></li>
+                        <li><a href="#game" onclick="startGame('sub')">Subtraktion</a></li>
                         <li><a href="#game" onclick="startGame('mul')">Multiplikation</a></li>
                         <li><a href="#game" onclick="startGame('div')">Divison</a></li>
                     </div>
