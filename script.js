@@ -37,7 +37,6 @@ function navigate(route) {
         }
     })
 
-
     document.querySelectorAll('.view').forEach(view => {
         view.classList.add('hidden');
     });
@@ -49,8 +48,6 @@ window.addEventListener('popstate', () => {
     const route = location.hash.replace('#', '');
     navigate(route);
 });
-
-
 
 const form = document.getElementById("nameForm");
 
@@ -78,7 +75,7 @@ function login(username) {
 
 function logout() {
     player = null;
-    localStorage.clear();
+    localStorage.removeItem("player");
     document.querySelectorAll(".playername").forEach(el => el.innerHTML = "");
     document.querySelectorAll('.authenticated').forEach(el => el.classList.add('hidden'));
     document.querySelectorAll('.unauthenticated').forEach(el => el.classList.remove('hidden'));
@@ -213,7 +210,7 @@ function startGame(g) {
     
     questionNr = 0
     correctQuestions = 0;
-    totalQuestions = 5;
+    totalQuestions = 10;
     
     startTime = new Date();
     nextTest();
