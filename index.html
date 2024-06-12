@@ -4,37 +4,80 @@
         <link rel="stylesheet" href="index.css">
         <title>Matheking</title>
     </head>
-    <body>
-        <div class="title">Matheking</div>
-        <a href="new.html">Neues Spiel starten!</a>
+    <body onload="">
 
-        <div class="highscore">
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Platz</th>
-                        <th>Name</th>
-                        <th>Zeit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1.</td>
-                        <td>Wolfgang</td>
-                        <td>1:15</td>
-                    </tr>
-                    <tr>
-                        <td>2.</td>
-                        <td>Manuel</td>
-                        <td>1:17</td>
-                    </tr>
-                </tbody>
-            </table>
-
+        <div class="topmenu" style="height: 20px;">
+            <span style="margin-right: 10px;" class="playername"></span>
+            <button onclick="logout()" class="authenticated hidden">abmelden</button>
         </div>
 
+        <div class="title">Matheking</div>
         
+        <div class="header">
+            <nav>
+                <a href="#login" data-route="login" class="unauthenticated">Login</a>
+                <a href="#highscore" data-route="highscore">Highscore</a>
+                <a href="#select" data-route="select" class="authenticated hidden">Neues Spiel</a>
+            </nav>
+        </div>
+
+        <div id="content">
+            <div id="login" class="view">
+                <p>Wie heißt du?</p>
+                <form id="nameForm" class="namedialog">
+                    <label for="player">Dein Name:</label>
+                    <input type="text" id="player" name="player">
+                    <input type="submit" value="Start">
+                </form>
+    
+                <div style="margin: 10px;">
+                    <button onclick="quickLogin('Anna')">Anna</button>
+                    <button onclick="quickLogin('Manuel')">Manuel</button>
+                    <button onclick="quickLogin('Sebastian')">Sebastian</button>
+                    <button onclick="quickLogin('Wolfgang')">Wolfgang</button>
+                </div>
+            </div>
+            <div id="highscore" class="view hidden">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Platz</th>
+                            <th>Name</th>
+                            <th>Zeit</th>
+                        </tr>
+                    </thead>
+                    <tbody id="highscore-entries">
+                    </tbody>
+                </table>            </div>
+
+            <div id="select" class="view hidden">
+                <div>
+                    <p>Was möchtest du spielen?</p>
+                    <div style="margin: 10px; text-align: left;" class="games">
+                        <li><a href="#game" onclick="startGame('mul')">Multiplikation</a></li>
+                        <li><a href="#game" onclick="startGame('div')">Divison</a></li>
+                    </div>
+                </div>             
+            </div>
+
+            <div id="game" class="view hidden">
+                <div class="counter">Frage 1:</div>
+                <div class="question">5*6=?</div>
+                <div class="answers">
+                    <button class="answer">10</button>
+                </div>
+            </div>
+
+            <div id="result" class="view hidden">
+                <div class="title">Dein Ergebnis:</div>
+                <div class="time"></div>
+                <div class="result">
+                    Du hast <span class="result"></span> Fragen richtig beantwortet.
+                </div>
+            </div>
+        </div>
+    
+        <script src="script.js"></script>
     </body>
 </html>
 
