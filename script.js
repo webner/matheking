@@ -8,6 +8,15 @@ if (!highscore) {
     highscore={}
 }
 
+const app = document.querySelector('#app')
+const fireworks = new Fireworks.default(app, {
+    autoresize: false,
+    boundaries: {
+        width: app.clientWidth,
+        height: app.clientHeight
+    }});
+
+
 function updateHighscore() {
 
     for (g of ["add", "sub", "mul", "div"]) {
@@ -32,7 +41,6 @@ document.querySelectorAll('nav a').forEach(link => {
 });
 
 function navigate(route) {
-    console.log("navigate to " + route)
     document.querySelectorAll('nav a').forEach(link => {
         if (link.getAttribute('data-route') == route) {
           link.classList.add("selected");
@@ -46,6 +54,10 @@ function navigate(route) {
     });
     document.getElementById(route).classList.remove('hidden');
     history.pushState(null, '', `#${route}`);
+
+    if (route != "result") {
+        fireworks.stop();
+    }
 }
 
 window.addEventListener('popstate', () => {
@@ -60,13 +72,13 @@ form.addEventListener("submit", function(event) {
     const playerName = document.getElementById("player").value;
     if (playerName) {
         login(playerName);
-        navigate("highscore");
+        navigate("select");
     }
 });
 
 function quickLogin(playerName) {
     login(playerName);
-    navigate("highscore");
+    navigate("select");
 }
 
 function login(username) {
@@ -171,6 +183,8 @@ function finishTest() {
 
     addHighscore(elapsedTime / 1000.0);
     navigate("result");
+
+    fireworks.start()
 }
 
 function nextTest() {

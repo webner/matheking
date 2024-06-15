@@ -4,7 +4,9 @@
         <link rel="stylesheet" href="index.css">
         <title>Matheking</title>
     </head>
-    <body onload="">
+    <body >
+        <div id="app"></div>
+
         <div class="header container">
             <div style="width: 20%;" class="title">Matheking</div>
             <nav>
@@ -36,7 +38,7 @@
                     <button onclick="quickLogin('Wolfgang')">Wolfgang</button>
                 </div>
             </div>
-            <div id="highscore" class="view hidden">
+            <div id="highscore" class="view hidden fireworks">
                 <h4>Addition</h4>
                 <table id="highscore-add" class="highscore">
                     <thead><tr><th>Platz</th><th>Name</th><th>Zeit</th></tr></thead>
@@ -90,8 +92,11 @@
                 </div>
             </div>
         </div>
+
     
+        <script src="fireworks.js"></script>
         <script src="script.js"></script>
+
     </body>
 </html>
 
