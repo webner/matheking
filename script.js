@@ -248,6 +248,7 @@ function startGame(g) {
     
     startTime = new Date();
     nextTest();
+    navigate("game");
 }
 
 // Initial navigation

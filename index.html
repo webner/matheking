@@ -5,20 +5,19 @@
         <title>Matheking</title>
     </head>
     <body onload="">
-
-        <div class="topmenu" style="height: 20px;">
-            <span style="margin-right: 10px;" class="playername"></span>
-            <button onclick="logout()" class="authenticated hidden">abmelden</button>
-        </div>
-
-        <div class="title">Matheking</div>
-        
-        <div class="header">
+        <div class="header container">
+            <div style="width: 20%;" class="title">Matheking</div>
             <nav>
                 <a href="#login" data-route="login" class="unauthenticated">Login</a>
-                <a href="#highscore" data-route="highscore">Highscore</a>
                 <a href="#select" data-route="select" class="authenticated hidden">Neues Spiel</a>
+                <a href="#highscore" data-route="highscore">Highscore</a>
             </nav>
+            <div style="width: 20%;">
+                <div class="topmenu" style="height: 20px;">
+                    <span style="margin-right: 10px;" class="playername"></span>
+                    <button onclick="logout()" class="authenticated hidden">abmelden</button>
+                </div>
+            </div>
         </div>
 
         <div id="content">
@@ -66,11 +65,11 @@
             <div id="select" class="view hidden">
                 <div>
                     <p>Was möchtest du spielen?</p>
-                    <div style="margin: 10px; text-align: left;" class="games">
-                        <li><a href="#game" onclick="startGame('add')">Addition</a></li>
-                        <li><a href="#game" onclick="startGame('sub')">Subtraktion</a></li>
-                        <li><a href="#game" onclick="startGame('mul')">Multiplikation</a></li>
-                        <li><a href="#game" onclick="startGame('div')">Divison</a></li>
+                    <div class="games">
+                        <button class="start" onclick="startGame('add')">Addition</button>
+                        <button class="start" onclick="startGame('sub')">Subtraktion</button>
+                        <button class="start" onclick="startGame('mul')">Multiplikation</button>
+                        <button class="start" onclick="startGame('div')">Divison</button>
                     </div>
                 </div>             
             </div>
@@ -84,7 +83,7 @@
             </div>
 
             <div id="result" class="view hidden">
-                <div class="title">Dein Ergebnis:</div>
+                <h2>Dein Ergebnis:</h2>
                 <div class="time"></div>
                 <div class="result">
                     Du hast <span class="result"></span> Fragen richtig beantwortet.
